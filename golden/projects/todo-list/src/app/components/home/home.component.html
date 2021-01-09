@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-12 text-right">
+        <button (click)="btnNewItemList()" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i>
+      Nuevo</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <app-list-manage [(listItems)]="listItems" (itemSelectedChange)="itemSelectedChange($event)"></app-list-manage>
+    </div>
+    <div class="col-6">
+        <ng-container *ngIf="itemSelected != null; else noSelected">
+            <form [formGroup]="itemSelectToEdit">
+                <mat-form-field class="w-100">
+                    <mat-label>Titulo</mat-label>
+                    <input formControlName="Title" matInput placeholder="label" value="value">
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <mat-label>Contenido</mat-label>
+                    <textarea matInput formControlName="Content"></textarea>
+                </mat-form-field>
+                <div class="col-12 p-0 text-right">
+                    <button class="btn btn-success btn-sm" (click)="btnSaveEdited()"><i class="fas fa-save"></i></button>
+                </div>
+            </form>
+        </ng-container>
+        <ng-template #noSelected>
+            <h2>No a seleccionado nada</h2>
+        </ng-template>
+    </div>
+</div>

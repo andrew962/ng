@@ -1,0 +1,16 @@
+<mat-list>
+    <mat-list-item *ngFor="let item of listItems; let i=index">
+        <div class="row w-100">
+            <div class="col-6 p-0">
+                <h2>{{ item.Title}}</h2>
+            </div>
+            <div class="col-6 text-right p-0">
+                <div class="btn-group" role="group" aria-label="Button group">
+                    <button class="btn btn-primary btn-sm" (click)="itemSelected(item)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm" (click)="btnDelete(i)"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </mat-list-item>
+</mat-list>
+<mat-card *ngIf="listItems.length<=0">Lista vacía</mat-card>

@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">Mini-CMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Home">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse order-1" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item" [routerLinkActive]="'active'">
+                <a class="nav-link" [routerLink]="'/'">Inicio</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <button class="btn btn-sm btn-primary" (click)="btnOpenDialogLogin()" [routerLink]="'login'">Iniciar
+                    sesión</button>
+                <!-- <a class="nav-link" [routerLink]="'login'">Login</a> -->
+            </li>
+        </ul>
+    </div>
+</nav>

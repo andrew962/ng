@@ -1,16 +1,24 @@
-<mat-list>
+<!-- <mat-list>
     <mat-list-item *ngFor="let item of listItems; let i=index">
-        <div class="row w-100">
+        <mat-card>
             <div class="col-6 p-0">
-                <h2>{{ item.Title}}</h2>
+                <div mat-line>{{ item.Title}}</div>
+                <div mat-line> {{item.Content}} </div>
             </div>
             <div class="col-6 text-right p-0">
                 <div class="btn-group" role="group" aria-label="Button group">
-                    <button class="btn btn-primary btn-sm" (click)="itemSelected(item)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm" (click)="itemSelected(item)"><i
+                            class="fas fa-edit"></i></button>
                     <button class="btn btn-danger btn-sm" (click)="btnDelete(i)"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
-        </div>
+        </mat-card>
     </mat-list-item>
-</mat-list>
-<mat-card *ngIf="listItems.length<=0">Lista vacía</mat-card>
+</mat-list> -->
+<ng-container *ngIf="listItems.length<=0">
+    <h3 class="d-block">
+        Nota nueva
+    </h3>
+    <input type="image" class="shadow p-2" (click)="btnAddNote()" width="50%" src="assets/img/add_notes.svg"
+        alt="Lista de notas">
+</ng-container>

@@ -17,7 +17,7 @@ export class DialogCreateNewComponent implements OnInit {
     this.itemFG = fb.group({
       Title: [, Validators.required],
       Content: []
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -28,9 +28,12 @@ export class DialogCreateNewComponent implements OnInit {
       Uid: uid(16),
       Title: this.itemFG.controls.Title.value,
       Content: this.itemFG.controls.Content.value
-    }
-    this.dialogRef.close(newItem)
+    };
+    this.dialogRef.close(newItem);
     // alert(JSON.stringify(newItem));
+  }
+  btnClose() {
+    this.dialogRef.close();
   }
   get disabledBtn(): boolean {
     return this.itemFG.invalid;

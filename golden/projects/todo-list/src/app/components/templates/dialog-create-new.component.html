@@ -19,9 +19,10 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions class="justify-content-end">
-    <button class="btn btn-sm" mat-dialog-close>Cancelar</button>
-    <button class="btn btn-success btn-sm" [disabled]="disabledBtn" (click)="btnAdd()" [mat-dialog-close]="true" cdkFocusInitial>
-    <i class="fas fa-plus"></i>
-    Agregar
-  </button>
+    <button class="btn btn-sm" (click)="btnClose()">Cancelar</button>
+    <button class="btn btn-success btn-sm" [disabled]="disabledBtn" (click)="btnAdd()" [mat-dialog-close]="true"
+        cdkFocusInitial>
+        <i class="fas fa-plus"></i>
+        Agregar
+    </button>
 </mat-dialog-actions>

@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-12 text-right">
         <button (click)="btnNewItemList()" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i>
-      Nuevo</button>
+            Nuevo</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-6">
+<!-- <div class="row">
+    <div class="col-6 text-center">
         <app-list-manage [(listItems)]="listItems" (itemSelectedChange)="itemSelectedChange($event)"></app-list-manage>
     </div>
     <div class="col-6">
@@ -20,7 +20,8 @@
                     <textarea matInput formControlName="Content"></textarea>
                 </mat-form-field>
                 <div class="col-12 p-0 text-right">
-                    <button class="btn btn-success btn-sm" (click)="btnSaveEdited()"><i class="fas fa-save"></i></button>
+                    <button class="btn btn-success btn-sm" (click)="btnSaveEdited()"><i
+                            class="fas fa-save"></i></button>
                 </div>
             </form>
         </ng-container>
@@ -28,4 +29,4 @@
             <h2>No a seleccionado nada</h2>
         </ng-template>
     </div>
-</div>
+</div> -->

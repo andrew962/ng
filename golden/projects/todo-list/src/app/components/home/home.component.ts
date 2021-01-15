@@ -33,7 +33,9 @@ export class HomeComponent implements OnInit {
   btnNewItemList() {
     let dialogRef = this.dialog.open(DialogCreateNewComponent);
     dialogRef.afterClosed().subscribe((res: NewItemList) => {
-      this.listItems.push(res);
+      if (res.Title != null) {
+        this.listItems.push(res);
+      }
     });
   }
   itemSelectedChange(event: NewItemList) {

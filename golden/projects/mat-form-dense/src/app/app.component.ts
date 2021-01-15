@@ -8,5 +8,5 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AppComponent {
   title = 'mat-form-dense';
-  test = new FormControl('', [Validators.required, Validators.maxLength(2)]);
+  // test = new FormControl('', [Validators.required, Validators.maxLength(2)]);
 }

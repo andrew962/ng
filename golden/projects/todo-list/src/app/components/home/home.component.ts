@@ -13,7 +13,7 @@ import * as _ from 'underscore';
   ]
 })
 export class HomeComponent implements OnInit {
-  listItems: NewItemList[] = []
+  listItems: NewItemList[] = [];
   itemSelected: NewItemList;
   itemSelectToEdit: FormGroup;
   constructor(private title: Title,
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     let dialogRef = this.dialog.open(DialogCreateNewComponent);
     dialogRef.afterClosed().subscribe((res: NewItemList) => {
       this.listItems.push(res);
-    })
+    });
   }
   itemSelectedChange(event: NewItemList) {
     this.itemSelected = event;
@@ -42,13 +42,14 @@ export class HomeComponent implements OnInit {
       Title: event.Title,
       Content: event.Content,
       Uid: event.Uid
-    })
+    });
   }
   btnSaveEdited() {
     let selected: NewItemList = _.findWhere(this.listItems, { Uid: this.itemSelectToEdit.controls.Uid.value });
+    console.log(this.listItems, selected);
     selected.Title = this.itemSelectToEdit.controls.Title.value;
     selected.Content = this.itemSelectToEdit.controls.Content.value;
-    this.itemSelected = null
+    this.itemSelected = null;
   }
 
 }

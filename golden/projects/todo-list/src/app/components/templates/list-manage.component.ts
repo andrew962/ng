@@ -22,9 +22,11 @@ export class ListManageComponent implements OnInit {
     this.listItems = list;
     this.listItemsChange.emit(list)
   }
+
   itemSelected(event) {
     this.itemSelectedChange.emit(event);
   }
+  
   btnDelete(i: number) {
     this.listItems.splice(i, 1);
   }

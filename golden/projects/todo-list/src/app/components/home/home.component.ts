@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
   }
   btnSaveEdited() {
     let selected: NewItemList = _.findWhere(this.listItems, { Uid: this.itemSelectToEdit.controls.Uid.value });
+    console.log(this.listItems, selected);
     selected.Title = this.itemSelectToEdit.controls.Title.value;
     selected.Content = this.itemSelectToEdit.controls.Content.value;
     this.itemSelected = null;

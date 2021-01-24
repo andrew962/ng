@@ -778,5 +778,8 @@
       }
     }
   },
-  "defaultProject": "golden"
+  "defaultProject": "golden",
+  "cli": {
+    "analytics": false
+  }
 }

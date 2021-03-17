@@ -13,6 +13,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Run
 ng serve --project mini-cms
+Catalleya: ng serve --project catalleyaWeb
 
 ## Build
 

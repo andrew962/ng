@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-bg justify-content-between">
+    <a class="navbar-brand" [routerLink]="['']">Navbar</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" [routerLink]="['']" routerLinkActive="active">Inicio</a>
+            <a class="nav-item nav-link" [routerLink]="['/af-admin']" routerLinkActive="active">Admin</a>
+        </div>
+    </div>
+
+    <ng-container *ngIf="isLogged$ | async; else isNotLogged">
+        <button class="btn btn-info btn-sm" (click)="logOut()">Cerrar sesion</button>
+        {{ (currentUser$ | async).UserName }}
+        <div class="p-1">
+            <img style="width: 30px;" [src]="(currentUser$ | async).PhotoURL" alt="">
+        </div>
+
+    </ng-container>
+    <ng-template #isNotLogged>
+        <button class="btn btn-info btn-sm" (click)="loginBtn()">Iniciar sesion</button>
+    </ng-template>
+</nav>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "catlleyadb": {
+      "hosting": {
+        "golden": [
+          "catlleyadb"
+        ]
+      }
+    }
+  }
+}

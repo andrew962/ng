@@ -1,6 +1,4 @@
 export enum UserPath {
-    DbUserPath = 'user'
-}
-export enum UsersPath {
+    DbUserPath = 'user',
     DbUsersPath = 'users'
 }

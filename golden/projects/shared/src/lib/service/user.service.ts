@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subscription } from 'rxjs';
-import { UsersPath } from '../enums/user.enum';
+import { UserPath } from '../enums/user.enum';
 import { CurrentUser } from '../interfaces/currentUser.model';
 import { AuthenticationService } from './authentication.service';
 
@@ -29,9 +29,10 @@ export class UserService implements OnDestroy {
   }
 
   createUser() {
-    this.db.database.ref(UsersPath.DbUsersPath).child(this.uid).set({
+    this.db.database.ref(UserPath.DbUsersPath).child(this.uid).set({
       User: this.user,
-      Permission: {
+      SuperUser: false,
+      Permissions: {
         Create: false,
         Update: false,
         Delete: false
@@ -40,19 +41,11 @@ export class UserService implements OnDestroy {
     })
   }
   getUsers() {
-    return this.db.database.ref(UsersPath.DbUsersPath).get()
+    return this.db.database.ref(UserPath.DbUsersPath).get()
   }
   updateUsers(data) {
-    return this.db.database.ref(UsersPath.DbUsersPath).set(data);
+    return this.db.database.ref(UserPath.DbUsersPath).set(data);
   }
-  updateUser() {
-    this.db.database.ref(UsersPath.DbUsersPath).child(this.uid).update({
-      Permission: {
-        Create: true,
-        Update: true,
-        Delete: true
-      }
-    })
-  }
+
 
 }

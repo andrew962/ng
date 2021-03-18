@@ -1,6 +1,6 @@
 <div class="row mt-3">
     <div class="col-12 text-right">
-        <button class="btn btn-sm btn-success" (click)="updateUsersBtn()">
+        <button class="btn btn-sm btn-success" [disabled]="!superUser" (click)="updateUsersBtn()">
             <i class="fas fa-save"></i> Guardar
         </button>
     </div>
@@ -11,10 +11,15 @@
                     <mat-panel-title>
                         {{ userItem.value.User.UserName }}
                     </mat-panel-title>
-                    <mat-panel-description>
-                        {{ userItem.value.User.UserEmail }}
+                    <mat-panel-description class="float-right" style="display: contents;">
+                        <img style="width: 30px;" [src]="userItem.value.User.PhotoURL" alt="">
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-12">
+                        {{ userItem.value.User.UserEmail }}
+                    </div>
+                </div>
                 <ng-container [formGroup]="userItem">
                     <div class="row" formGroupName="Permissions">
                         <div class="col-12">
@@ -26,6 +31,9 @@
                         <div class="col-12">
                             <mat-slide-toggle formControlName="Delete">Borrar</mat-slide-toggle>
                         </div>
+                        <!-- <div class="col-12">
+                            <mat-slide-toggle formControlName="SuperUser">Super Usuario</mat-slide-toggle>
+                        </div> -->
                     </div>
                 </ng-container>
             </mat-expansion-panel>

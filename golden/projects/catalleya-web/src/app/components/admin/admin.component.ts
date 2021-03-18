@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { UserModel } from 'projects/shared/src/lib/interfaces/user.model';
+import { CurrentUser } from 'projects/shared/src/lib/interfaces/currentUser.model';
+import { AuthenticationService } from 'projects/shared/src/lib/service/authentication.service';
 import { UserService } from 'projects/shared/src/lib/service/user.service';
-import { of } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import _ from "underscore";
 
 @Component({
@@ -11,22 +12,31 @@ import _ from "underscore";
   styles: [
   ]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
   usersList: FormArray = new FormArray([]);
-
+  superUserSubscription: Subscription;
+  superUser: boolean = false;
+  currentUser$: Observable<CurrentUser>
   constructor(
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private auth: AuthenticationService
+  ) {
+    this.superUserSubscription = this.auth.superUser$.subscribe(s => this.superUser = s);
+    this.currentUser$ = this.auth.currentUser$;
+  }
+  ngOnDestroy(): void {
+    this.superUserSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.userService.getUsers().then(r => {
       r.forEach(item => {
-        console.log(item.val());
         let group = new FormGroup({
+          SuperUser: new FormControl({ value: item.val().SuperUser, disabled: !this.superUser }),
           Permissions: new FormGroup({
-            Create: new FormControl(item.val().Permission.Create),
-            Update: new FormControl(item.val().Permission.Update),
-            Delete: new FormControl(item.val().Permission.Delete)
+            Create: new FormControl({ value: item.val().Permissions.Create, disabled: !this.superUser }),
+            Update: new FormControl({ value: item.val().Permissions.Update, disabled: !this.superUser }),
+            Delete: new FormControl({ value: item.val().Permissions.Delete, disabled: !this.superUser })
           }),
           User: new FormGroup({
             Uid: new FormControl(item.val().User.Uid),
@@ -43,9 +53,11 @@ export class AdminComponent implements OnInit {
     this.userService.createUser()
   }
   updateUsersBtn() {
-    this.userService.updateUsers(this.usersList.value).then(r => {
-      console.log(r)
+    let group = {};
+    _.map(this.usersList.value, item => {
+      group[item.User.Uid] = item;
     })
+    this.userService.updateUsers(group).then(() => 'Done!')
   }
 
 }

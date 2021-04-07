@@ -1,4 +1,4 @@
-<div class="row mt-3">
+<div class="row mt-3" *ngIf="superUser">
     <div class="col-12 text-right">
         <button class="btn btn-sm btn-success" [disabled]="!superUser" (click)="updateUsersBtn()">
             <i class="fas fa-save"></i> Guardar
@@ -38,5 +38,13 @@
                 </ng-container>
             </mat-expansion-panel>
         </mat-accordion>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-6">
+        <h3>Logo</h3>
+        <!-- <img src="src" alt=""> -->
+        <button class="btn btn-sm btn-info" (click)="btnFileUpload.click()">Subir logo</button>
+        <input type="file" hidden #btnFileUpload #eventFile (change)="onFileSelected($event)">
     </div>
 </div>

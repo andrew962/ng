@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-
-.navbar-bg{
-    background-color: gray;
+$primary-color: #a569bd;
+$secondary-color: #dbc3c7;
+$tertiary-color: #fdfe;
+$color-5: #e8daef;
+.navbar-bg {
+    background-color: $primary-color;
+}
+.bg {
+    background-color: $color-5;
 }

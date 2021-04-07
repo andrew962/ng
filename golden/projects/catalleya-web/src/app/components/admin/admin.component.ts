@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CurrentUser } from 'projects/shared/src/lib/interfaces/currentUser.model';
 import { AuthenticationService } from 'projects/shared/src/lib/service/authentication.service';
+import { FileUploadService } from 'projects/shared/src/lib/service/file-upload.service';
 import { UserService } from 'projects/shared/src/lib/service/user.service';
 import { Observable, Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import _ from "underscore";
 
 @Component({
@@ -13,13 +15,15 @@ import _ from "underscore";
   ]
 })
 export class AdminComponent implements OnInit, OnDestroy {
+  @ViewChild('eventFile', { static: true }) private eventFile;
   usersList: FormArray = new FormArray([]);
   superUserSubscription: Subscription;
   superUser: boolean = false;
   currentUser$: Observable<CurrentUser>
   constructor(
     private userService: UserService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private fUpload: FileUploadService
   ) {
     this.superUserSubscription = this.auth.superUser$.subscribe(s => this.superUser = s);
     this.currentUser$ = this.auth.currentUser$;
@@ -59,5 +63,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     })
     this.userService.updateUsers(group).then(() => 'Done!')
   }
+  onFileSelected(event) {
+    this.fUpload.upload(event.target.files[0], event.target.files[0].name, 'logo').subscribe(r => {
+      console.log(r);
 
+    })
+  }
 }

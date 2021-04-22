@@ -64,9 +64,12 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.userService.updateUsers(group).then(() => 'Done!')
   }
   onFileSelected(event) {
-    this.fUpload.upload(event.target.files[0], event.target.files[0].name, 'logo').subscribe(r => {
-      console.log(r);
+    //event.target.files[0], event.target.files[0].name, 'logo'
+    // this.fUpload.upload().subscribe(r => {
+    //   console.log(r);
 
-    })
+    // })
+    console.log(this.fUpload.upload());
+
   }
 }

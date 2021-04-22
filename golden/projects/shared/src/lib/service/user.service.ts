@@ -46,6 +46,9 @@ export class UserService implements OnDestroy {
   updateUsers(data) {
     return this.db.database.ref(UserPath.DbUsersPath).set(data);
   }
-
-
+  isAllowedUpdate(uid) {
+    this.db.database.ref(UserPath.DbUsersPath).child(uid).child('Permissions').child('Update').get().then(r => {
+      return r.val();
+    })
+  }
 }

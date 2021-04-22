@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { concatMap, finalize, tap } from 'rxjs/operators';
 import { CurrentUser } from '../interfaces/currentUser.model';
 import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,20 @@ export class FileUploadService {
   downloadURL: Observable<string>;
   constructor(
     private fStorage: AngularFireStorage,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private userService: UserService
   ) {
     this.authSubscription = this.auth.currentUser$.subscribe(u => {
       this.user = u;
       this.uid = u?.Uid
     });
   }
-  upload(file, fileName?: string, path: string = 'images') {
-    let filePath: string = `${this.uid}/${path}/${fileName}`
-    let fileRef = this.fStorage.ref(filePath);
-    return this.fStorage.upload(filePath, file).snapshotChanges().pipe(concatMap(r => fileRef.getDownloadURL()));
+  upload() {//file, fileName?: string, path: string = 'images'
+    return this.userService.isAllowedUpdate(this.uid)
+
+    // let filePath: string = `${this.uid}/${path}/${fileName}`
+    // let fileRef = this.fStorage.ref(filePath);
+    // return this.fStorage.upload(filePath, file).snapshotChanges().pipe(concatMap(r => fileRef.getDownloadURL()));
   }
   getFile(filePath) {
     this.fStorage.ref(filePath).getDownloadURL().subscribe(r => {

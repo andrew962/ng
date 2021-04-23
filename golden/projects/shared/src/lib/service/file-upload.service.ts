@@ -24,12 +24,10 @@ export class FileUploadService {
       this.uid = u?.Uid
     });
   }
-  upload() {//file, fileName?: string, path: string = 'images'
-    return this.userService.isAllowedUpdate(this.uid)
-
-    // let filePath: string = `${this.uid}/${path}/${fileName}`
-    // let fileRef = this.fStorage.ref(filePath);
-    // return this.fStorage.upload(filePath, file).snapshotChanges().pipe(concatMap(r => fileRef.getDownloadURL()));
+  upload(file, fileName?: string, path: string = 'images') {
+    let filePath: string = `${this.uid}/${path}/${fileName}`
+    let fileRef = this.fStorage.ref(filePath);
+    return this.fStorage.upload(filePath, file).snapshotChanges().pipe(concatMap(r => fileRef.getDownloadURL()));
   }
   getFile(filePath) {
     this.fStorage.ref(filePath).getDownloadURL().subscribe(r => {

@@ -5,7 +5,7 @@ import { AuthenticationService } from 'projects/shared/src/lib/service/authentic
 import { FileUploadService } from 'projects/shared/src/lib/service/file-upload.service';
 import { UserService } from 'projects/shared/src/lib/service/user.service';
 import { Observable, Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
 import _ from "underscore";
 
 @Component({
@@ -64,12 +64,17 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.userService.updateUsers(group).then(() => 'Done!')
   }
   onFileSelected(event) {
-    //event.target.files[0], event.target.files[0].name, 'logo'
-    // this.fUpload.upload().subscribe(r => {
-    //   console.log(r);
-
-    // })
-    console.log(this.fUpload.upload());
+    this.userService.isAllowedUpdate().then(r => {
+      if (r.Update) {
+        this.fUpload.upload(event.target.files[0], event.target.files[0].name, 'logo').subscribe(r => {
+          console.log(r);
+        })
+      } else {
+        console.log('No puede');
+      }
+    })
+  }
+  test() {
 
   }
 }

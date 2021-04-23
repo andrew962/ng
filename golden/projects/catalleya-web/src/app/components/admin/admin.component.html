@@ -44,7 +44,9 @@
     <div class="col-6">
         <h3>Logo</h3>
         <!-- <img src="src" alt=""> -->
-        <button class="btn btn-sm btn-info" (click)="btnFileUpload.click()">Subir logo</button>
+        <button class="btn btn-sm btn-info" (click)="btnFileUpload.click()">
+            <i class="fas fa-file-upload"></i> Subir logo</button>
         <input type="file" hidden #btnFileUpload #eventFile (change)="onFileSelected($event)">
     </div>
+    <button (click)="test()">test</button>
 </div>

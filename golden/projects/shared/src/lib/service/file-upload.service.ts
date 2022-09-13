@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { concatMap, finalize, tap } from 'rxjs/operators';
 import { CurrentUser } from '../interfaces/currentUser.model';
 import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class FileUploadService {
   downloadURL: Observable<string>;
   constructor(
     private fStorage: AngularFireStorage,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private userService: UserService
   ) {
     this.authSubscription = this.auth.currentUser$.subscribe(u => {
       this.user = u;

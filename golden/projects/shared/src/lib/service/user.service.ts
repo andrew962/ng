@@ -1,7 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UserPath } from '../enums/user.enum';
 import { CurrentUser } from '../interfaces/currentUser.model';
 import { AuthenticationService } from './authentication.service';
@@ -46,6 +47,8 @@ export class UserService implements OnDestroy {
   updateUsers(data) {
     return this.db.database.ref(UserPath.DbUsersPath).set(data);
   }
-
-
+  isAllowedUpdate() {
+    let ref = this.db.database.ref(UserPath.DbUsersPath).child(this.uid).child('Permissions');
+    return this.db.object(ref).query.get().then(r => r.val());
+  }
 }
